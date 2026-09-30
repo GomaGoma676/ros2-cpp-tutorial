@@ -1,0 +1,46 @@
+#include "rclcpp/rclcpp.hpp"
+#include "example_interfaces/srv/add_two_ints.hpp"
+
+class AddTwoIntsClientNode : public rclcpp::Node
+{
+public:
+  AddTwoIntsClientNode() : Node("add_two_ints_client")
+  {
+    client_ = this->create_client<example_interfaces::srv::AddTwoInts>("add_two_ints");
+  }
+
+  void callAddTwoInts(int a, int b)
+  {
+    using namespace std::chrono_literals;
+
+    while (!client_->wait_for_service(1s)) {
+      RCLCPP_WARN(this->get_logger(), "Waiting for the server...");
+    }
+
+    auto request = std::make_shared<example_interfaces::srv::AddTwoInts::Request>();
+    request->a = a;
+    request->b = b;
+
+    client_->async_send_request(
+      request,
+      [this](rclcpp::Client<example_interfaces::srv::AddTwoInts>::SharedFuture future) {
+        auto response = future.get();
+        RCLCPP_INFO(this->get_logger(), "Sum: %ld", response->sum);
+      }
+    );
+  }
+
+private:
+  rclcpp::Client<example_interfaces::srv::AddTwoInts>::SharedPtr client_;
+};
+
+int main(int argc, char * argv[])
+{
+  rclcpp::init(argc, argv);
+  auto node = std::make_shared<AddTwoIntsClientNode>();
+//   rclcpp::spin(std::make_shared<AddTwoIntsClientNode>());
+  node->callAddTwoInts(10,5);
+  rclcpp::spin(node);
+  rclcpp::shutdown();
+  return 0;
+}

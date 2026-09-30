@@ -1,0 +1,6 @@
+int64 target_number
+float64 period
+---
+int64 reached_number
+---
+int64 current_number
