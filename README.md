@@ -10,7 +10,6 @@
 Launch the ROS 2 Jazzy Desktop environment:
 
 ```bash
-# Recommended Docker Run Command
 docker run -d \
   -p 6080:80 \
   --security-opt seccomp=unconfined \
