@@ -9,7 +9,6 @@ public:
 };
 class Child
 {
-
 public:
     // std::shared_ptr<Parent> parent;
     std::weak_ptr<Parent> parent;

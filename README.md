@@ -48,7 +48,7 @@ ros2 run cpp_basic basic
 ```bash
 # Create package with ROS 2 C++ client library
 cd ~/ros2_ws/src
-ros2 pkg create pub_sub --dependencies rclcpp
+ros2 pkg create pub_sub --dependencies rclcpp std_msgs
 
 touch {pub.cpp,sub.cpp}
 
