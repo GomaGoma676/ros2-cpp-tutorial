@@ -13,7 +13,8 @@ public:
   {
     using namespace std::chrono_literals;
 
-    while (!client_->wait_for_service(1s)) {
+    while (!client_->wait_for_service(1s))
+    {
       RCLCPP_WARN(this->get_logger(), "Waiting for the server...");
     }
 
@@ -22,24 +23,23 @@ public:
     request->b = b;
 
     client_->async_send_request(
-      request,
-      [this](rclcpp::Client<example_interfaces::srv::AddTwoInts>::SharedFuture future) {
-        auto response = future.get();
-        RCLCPP_INFO(this->get_logger(), "Sum: %ld", response->sum);
-      }
-    );
+        request,
+        [this](rclcpp::Client<example_interfaces::srv::AddTwoInts>::SharedFuture future)
+        {
+          auto response = future.get();
+          RCLCPP_INFO(this->get_logger(), "Sum: %ld", response->sum);
+        });
   }
 
 private:
   rclcpp::Client<example_interfaces::srv::AddTwoInts>::SharedPtr client_;
 };
 
-int main(int argc, char * argv[])
+int main(int argc, char *argv[])
 {
   rclcpp::init(argc, argv);
   auto node = std::make_shared<AddTwoIntsClientNode>();
-//   rclcpp::spin(std::make_shared<AddTwoIntsClientNode>());
-  node->callAddTwoInts(10,5);
+  node->callAddTwoInts(10, 5);
   rclcpp::spin(node);
   rclcpp::shutdown();
   return 0;
