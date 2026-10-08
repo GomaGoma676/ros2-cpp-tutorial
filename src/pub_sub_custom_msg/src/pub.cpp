@@ -24,12 +24,8 @@ public:
       message.lon = 139.7671f + (this->count_ * 0.0001f);
 
       RCLCPP_INFO_STREAM(
-        this->get_logger(),
-        "Publishing: ID='" << message.sensor_id << 
-        "', Healthy=" << (message.is_healthy ? "true" : "false") << 
-        ", Lat=" << message.lat << 
-        ", Lon=" << message.lon
-      );
+          this->get_logger(),
+          "Publishing: ID='" << message.sensor_id << "', Healthy=" << (message.is_healthy ? "true" : "false") << ", Lat=" << message.lat << ", Lon=" << message.lon);
       this->publisher_->publish(message);
       this->count_++;
     };

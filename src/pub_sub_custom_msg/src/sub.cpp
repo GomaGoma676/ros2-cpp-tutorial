@@ -7,29 +7,26 @@ class MinimalSubscriber : public rclcpp::Node
 {
 public:
   MinimalSubscriber()
-  : Node("minimal_subscriber")
+      : Node("minimal_subscriber")
   {
     auto topic_callback =
-      [this](const custom_interface::msg::Gps::SharedPtr msg) -> void {
-        RCLCPP_INFO(
+        [this](const custom_interface::msg::Gps::SharedPtr msg) -> void
+    {
+      RCLCPP_INFO_STREAM(
           this->get_logger(),
-          "I heard: [ID: %s, Healthy: %s, Lat: %.4f, Lon: %.4f]",
-          msg->sensor_id.c_str(),
-          msg->is_healthy ? "true" : "false",
-          msg->lat,
-          msg->lon);
-      };
+          "I heard: [ID: " << msg->sensor_id << ", Healthy: " << std::boolalpha << msg->is_healthy << ", Lat: " << msg->lat << ", Lon: " << msg->lon << "]");
+    };
 
     subscription_ =
-      this->create_subscription<custom_interface::msg::Gps>(
-        "gps", 10, topic_callback);
+        this->create_subscription<custom_interface::msg::Gps>(
+            "gps", 10, topic_callback);
   }
 
 private:
   rclcpp::Subscription<custom_interface::msg::Gps>::SharedPtr subscription_;
 };
 
-int main(int argc, char * argv[])
+int main(int argc, char *argv[])
 {
   rclcpp::init(argc, argv);
   rclcpp::spin(std::make_shared<MinimalSubscriber>());
