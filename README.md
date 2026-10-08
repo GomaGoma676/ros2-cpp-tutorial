@@ -166,14 +166,14 @@ colcon build --packages-select custom_action_interfaces action_basic
 source install/setup.bash
 
 # Run Action Server
-ros2 run action_basic count_until_server
+ros2 run action_basic increment_server
 
 # Action CLI Commands
 # Send a goal
-ros2 action send_goal /count_until custom_action_interfaces/action/CountUntil "{target_number: 4, period: 1.0}"
+ros2 action send_goal /increment custom_action_interfaces/action/Increment "{target_number: 4}" --feedback
 
 # Cancel an active goal
-ros2 service call /count_until/_action/cancel_goal action_msgs/srv/CancelGoal "{}"
+ros2 service call /increment/_action/cancel_goal action_msgs/srv/CancelGoal "{}"
 ```
 
 ## 7. Executors & Multithreading
