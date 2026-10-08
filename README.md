@@ -191,8 +191,6 @@ cd ~/ros2_ws
 colcon build --packages-select executor_basic
 source install/setup.bash
 
-# Single-threaded vs Multi-threaded execution
-ros2 run executor_basic single_th_executor
 ros2 run executor_basic multi_th_executor
 ```
 
