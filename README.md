@@ -132,7 +132,7 @@ touch Gps.msg
 cd ~/ros2_ws
 colcon build --packages-select custom_interface
 source install/setup.bash
-ros2 interface show custom_interface/msg/GPS
+ros2 interface show custom_interface/msg/Gps
 
 # Create new package that consumes a custom interface
 cd ~/ros2_ws/src
