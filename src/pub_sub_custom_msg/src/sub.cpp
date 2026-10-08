@@ -1,7 +1,7 @@
 #include <memory>
 
 #include "rclcpp/rclcpp.hpp"
-#include "custom_interface/msg/gps.hpp" // Gps.msg に対応するヘッダー
+#include "custom_interface/msg/gps.hpp"
 
 class MinimalSubscriber : public rclcpp::Node
 {
