@@ -41,13 +41,14 @@ public:
         cb_group1_ = this->create_callback_group(rclcpp::CallbackGroupType::MutuallyExclusive);
         cb_group2_ = this->create_callback_group(rclcpp::CallbackGroupType::MutuallyExclusive);
         this->timer1_ = this->create_wall_timer(
-            1000ms, [this]() { callbackTimer1(); }, cb_group1_);
+            1000ms, [this]()
+            { callbackTimer1(); }, cb_group1_);
         this->timer2_ = this->create_wall_timer(
-            1000ms, [this]() { callbackTimer2(); }, cb_group2_);
+            1000ms, [this]()
+            { callbackTimer2(); }, cb_group2_);
     }
 
 private:
-
     void callbackTimer1()
     {
         RCLCPP_INFO(this->get_logger(), "cb 1 on Thread: %d", ThreadIdMapper::getThreadNum());
@@ -71,17 +72,19 @@ class Node2 : public rclcpp::Node
 {
 public:
     Node2() : Node("node2")
-    {   
+    {
         cb_group_ = this->create_callback_group(rclcpp::CallbackGroupType::Reentrant);
         this->timer3_ = this->create_wall_timer(
-            1000ms, [this]() { callbackTimer3(); }, cb_group_);
+            1000ms, [this]()
+            { callbackTimer3(); }, cb_group_);
         this->timer4_ = this->create_wall_timer(
-            1000ms, [this]() { callbackTimer4(); }, cb_group_);
+            1000ms, [this]()
+            { callbackTimer4(); }, cb_group_);
     }
 
 private:
-    // int counter_ = 0;
-    std::atomic<int> counter_{0};
+    int counter_ = 0;
+    // std::atomic<int> counter_{0};
     void callbackTimer3()
     {
         int current = ++counter_;
