@@ -165,6 +165,7 @@ cd ~/ros2_ws
 colcon build --packages-select custom_action_interfaces action_basic
 source install/setup.bash
 
+ros2 interface show custom_action_interfaces/action/Increment
 # Run Action Server
 ros2 run action_basic increment_server
 
