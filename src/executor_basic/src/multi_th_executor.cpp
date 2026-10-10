@@ -108,17 +108,17 @@ private:
 int main(int argc, char **argv)
 {
     rclcpp::init(argc, argv);
-    // auto node1 = std::make_shared<Node1>();
-    auto node2 = std::make_shared<Node2>();
+    auto node1 = std::make_shared<Node1>();
+    // auto node2 = std::make_shared<Node2>();
     unsigned int num_threads = std::thread::hardware_concurrency();
     num_threads = 4;
     rclcpp::executors::MultiThreadedExecutor executor(
         rclcpp::ExecutorOptions(), num_threads);
 
-    // RCLCPP_INFO(node1->get_logger(), "Total available threads (Pool size): %u", num_threads);
-    RCLCPP_INFO(node2->get_logger(), "Total available threads (Pool size): %u", num_threads);
-    // executor.add_node(node1);
-    executor.add_node(node2);
+    RCLCPP_INFO(node1->get_logger(), "Total available threads (Pool size): %u", num_threads);
+    // RCLCPP_INFO(node2->get_logger(), "Total available threads (Pool size): %u", num_threads);
+    executor.add_node(node1);
+    // executor.add_node(node2);
     executor.spin();
     rclcpp::shutdown();
     return 0;
